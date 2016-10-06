@@ -46,12 +46,14 @@ var TypeaheadTokenizer = React.createClass({
   // TODO: Support initialized tokens
   //
   _renderTokens: function() {
-    var tokenClasses = {}
+    var tokenClasses = {};let mykey
     tokenClasses[this.props.customClasses.token] = !!this.props.customClasses.token;
     var classList = React.addons.classSet(tokenClasses);
     var result = this.state.selected.map(function(selected) {
-      mykey = selected.category + selected.operator + selected.value;
-
++      if(selected.value !== "" && selected.category !== selected.operator){
++          mykey = selected.category + selected.operator + selected.value;
++      }else{return;}
+      
       return (
         <Token key={mykey} className={classList}
           onRemove={ this._removeTokenForValue }>
